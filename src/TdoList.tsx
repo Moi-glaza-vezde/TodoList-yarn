@@ -1,5 +1,12 @@
+type TaskType = {
+   id: number;
+   title: string;
+   isDone: boolean;
+};
+
 type TodoListPropsType = {
    title: string;
+   tasks: Array<TaskType>;
 };
 
 export function TodoList(props: TodoListPropsType) {
