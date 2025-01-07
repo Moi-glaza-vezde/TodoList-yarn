@@ -1,4 +1,4 @@
-type TaskType = {
+export type TaskType = {
    id: number;
    title: string;
    isDone: boolean;
@@ -7,6 +7,7 @@ type TaskType = {
 type TodoListPropsType = {
    title: string;
    tasks: Array<TaskType>;
+   removeTask: (id: number) => void;
 };
 
 export function TodoList(props: TodoListPropsType) {
@@ -18,15 +19,18 @@ export function TodoList(props: TodoListPropsType) {
             <button>+</button>
          </div>
          <ul>
-            <li>
-               <input type="checkbox" checked={true} /> <span>HTML&CSS</span>
-            </li>
-            <li>
-               <input type="checkbox" checked={true} /> <span>JS</span>
-            </li>
-            <li>
-               <input type="checkbox" checked={false} /> <span>React</span>
-            </li>
+            {props.tasks.map((t) => (
+               <li key={t.id}>
+                  <input type="checkbox" checked={t.isDone} />
+                  <span>{t.title}</span>{' '}
+                  <button
+                     onClick={() => {
+                        props.removeTask(t.id);
+                     }}>
+                     x
+                  </button>
+               </li>
+            ))}
          </ul>
          <div>
             <button>All</button>
