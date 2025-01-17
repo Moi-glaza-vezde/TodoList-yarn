@@ -7,8 +7,8 @@ function App() {
    // let initTasks: Array<TaskType> = ;
 
    let [tasks, setTasks] = useState([
-      { id: v1(), title: 'HTML&CSS', isDone: true },
-      { id: v1(), title: 'JS', isDone: true },
+      { id: v1(), title: 'HTML&CSS', isDone: false },
+      { id: v1(), title: 'JS', isDone: false },
       { id: v1(), title: 'React', isDone: false },
       { id: v1(), title: 'Redux', isDone: false },
    ]);
@@ -30,6 +30,22 @@ function App() {
 
       setTasks(newTasks);
    }
+
+   function changeStatus(taskId: string, isDone: boolean) {
+      let task = tasks.find((t) => {
+         let task = tasks.find((t) => t.id === taskId);
+         if (task) {
+            task.isDone = isDone;
+         }
+
+         setTasks([...tasks]);
+         // if (t.id === taskId) {
+         //    return true;
+         // } else {
+         //    return false;
+         // }
+      });
+   }
    //------------------------------------------- 3 урок/
    let tasksForTodoList = tasks;
    if (filter === 'completed') {
@@ -47,6 +63,8 @@ function App() {
             removeTask={removeTask}
             changeFilter={changeFilter}
             addTask={addTask}
+            changeStatus={changeStatus}
+            filter={filter}
          />
       </div>
    );
